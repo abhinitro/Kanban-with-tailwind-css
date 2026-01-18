@@ -72,7 +72,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
     enableViewToggle = true,
     enableCreateTask = true,
     style = {},
-    renderTaskCard,
+    // renderTaskCard, // TODO: Implement custom task card rendering
     renderHeader,
 }) => {
     const {

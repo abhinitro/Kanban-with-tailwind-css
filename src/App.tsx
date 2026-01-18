@@ -67,9 +67,6 @@ function App() {
   // Handle task update - API integration point
   const handleTaskUpdate = async (updatedTask: Task) => {
     try {
-      // Store old task for rollback
-      const oldTask = tasks.find(t => t.id === updatedTask.id);
-
       // Optimistic update
       setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));
 
@@ -83,11 +80,6 @@ function App() {
       console.log('Task updated:', updatedTask);
     } catch (error) {
       console.error('Error updating task:', error);
-      // Rollback on error
-      const oldTask = tasks.find(t => t.id === updatedTask.id);
-      if (oldTask) {
-        setTasks(prev => prev.map(t => t.id === updatedTask.id ? oldTask : t));
-      }
       alert('Failed to update task. Please try again.');
     }
   };
@@ -95,9 +87,6 @@ function App() {
   // Handle task deletion - API integration point
   const handleTaskDelete = async (taskId: string) => {
     try {
-      // Store task for rollback
-      const deletedTask = tasks.find(t => t.id === taskId);
-
       // Optimistic update
       setTasks(prev => prev.filter(t => t.id !== taskId));
 
@@ -109,11 +98,6 @@ function App() {
       console.log('Task deleted:', taskId);
     } catch (error) {
       console.error('Error deleting task:', error);
-      // Rollback on error
-      const deletedTask = tasks.find(t => t.id === taskId);
-      if (deletedTask) {
-        setTasks(prev => [...prev, deletedTask]);
-      }
       alert('Failed to delete task. Please try again.');
     }
   };

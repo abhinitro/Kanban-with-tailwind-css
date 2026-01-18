@@ -10,7 +10,6 @@ import {
     MessageSquare,
     Send,
     Trash2,
-    Edit2,
     CheckCircle2,
     AlertCircle,
     Circle,
